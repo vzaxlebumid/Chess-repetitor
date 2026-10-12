@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Шахматы — индивидуальные занятия | Гафуров Умид</title>
+  <meta name="description" content="Индивидуальные занятия по шахматам для начинающих и опытных игроков. Персональная программа, анализ партий, тактика и стратегия. Пробное занятие — запишитесь.">
+  <meta property="og:title" content="Шахматы — искусство думать на несколько ходов вперёд">
+  <meta property="og:description" content="Индивидуальные занятия по шахматам для начинающих и опытных игроков.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%99%9E%3C/text%3E%3C/svg%3E">
+  
+  <style>
+/* ============================================================
+   ШАХМАТНАЯ АКАДЕМИЯ — дизайн-система
+   Палитра: глубокий уголь + тёплая слоновая кость + золото
+   ============================================================ */
+
+:root {
+  --bg: #14110c;
+  --bg-2: #1a1610;
+  --surface: #211c14;
+  --surface-2: #29221a;
+  --ivory: #f0e8d8;
+  --ivory-soft: #e6dcc6;
+  --muted: #b3a78d;
+  --gold: #c8a24b;
+  --gold-2: #e2c078;
+  --gold-soft: rgba(200, 162, 75, 0.14);
+  --line: rgba(200, 162, 75, 0.18);
+  --danger: #d98f7a;
+  --ok: #9ec49a;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --header-h: 76px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 12px);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--gold); color: #14110c; }
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font-family: inherit; }
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Типографика ---------- */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.2px;
+}
+
+h1 { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
+h2 { font-size: clamp(1.7rem, 3.2vw, 2.5rem); }
+h3 { font-size: 1.3rem; }
+
+.section { padding: 96px 0; }
+
+.section-head { max-width: 720px; margin-bottom: 56px; }
+.section-kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.section-sub { color: var(--muted); margin-top: 16px; }
+
+/* ---------- Кнопки ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 30px;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--gold-2);
+  outline-offset: 3px;
+}
+.btn-gold {
+  background: linear-gradient(180deg, var(--gold-2), var(--gold));
+  color: #211a0d;
+  box-shadow: 0 10px 26px rgba(200, 162, 75, 0.22);
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(200, 162, 75, 0.32); }
+.btn-outline {
+  background: transparent;
+  color: var(--ivory);
+  border-color: var(--line);
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold-2); transform: translateY(-2px); }
+.btn-card {
+  background: var(--gold-soft);
+  color: var(--gold-2);
+  border-color: var(--line);
+  width: 100%;
+}
+.btn-card:hover { background: var(--gold); color: #211a0d; }
+.btn-small {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  background: var(--surface-2);
+  color: var(--ivory-soft);
+  border-color: var(--line);
+}
+.btn-small:hover { border-color: var(--gold); color: var(--gold-2); }
+
+/* ---------- Шапка ---------- */
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: rgba(20, 17, 12, 0.86);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.site-header.scrolled { border-bottom-color: var(--line); }
+.header-inner {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.logo-mark {
+  font-size: 1.7rem;
+  color: var(--gold);
+  line-height: 1;
+}
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+.main-nav { display: flex; align-items: center; gap: 28px; }
+.main-nav a {
+  text-decoration: none;
+  color: var(--ivory-soft);
+  font-size: 0.97rem;
+  transition: color 0.18s ease;
+}
+.main-nav a:hover { color: var(--gold-2); }
+.nav-cta {
+  padding: 10px 22px;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius-sm);
+  color: var(--gold-2) !important;
+}
+.nav-cta:hover { background: var(--gold); color: #211a0d !important; }
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  width: 24px; height: 2px;
+  background: var(--ivory);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Герой ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--header-h) + 48px) 0 72px;
+  background:
+    radial-gradient(1100px 500px at 85% 10%, rgba(200, 162, 75, 0.07), transparent 60%),
+    var(--bg);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.16;
+  pointer-events: none;
+  mask-image: radial-gradient(closest-side at 50% 40%, #000 0%, transparent 100%);
+}
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 64px;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.82rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 8px 18px;
+  margin-bottom: 26px;
+  background: rgba(200, 162, 75, 0.06);
+}
+.hero-subtitle {
+  color: var(--muted);
+  font-size: 1.13rem;
+  max-width: 560px;
+  margin-top: 24px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
+.hero-points {
+  list-style: none;
+  margin-top: 42px;
+  display: grid;
+  gap: 10px;
+}
+.hero-points li {
+  position: relative;
+  padding-left: 30px;
+  color: var(--ivory-soft);
+  font-size: 0.99rem;
+}
+.hero-points li::before {
+  content: '♞';
+  position: absolute;
+  left: 0;
+  top: 1px;
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+.hero-visual { display: flex; justify-content: center; }
+.hero-board-wrap { position: relative; width: min(440px, 100%); }
+.hero-board {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 4.5%;
+  background: #241d12;
+  animation: heroFloat 7s ease-in-out infinite;
+}
+@keyframes heroFloat {
+  0%, 100% { transform: translateY(0) rotate(-0.4deg); }
+  50% { transform: translateY(-12px) rotate(0.4deg); }
+}
+.hero-badge {
+  position: absolute;
+  left: -26px;
+  bottom: 34px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 2px;
+  animation: heroFloat 7s ease-in-out 0.8s infinite;
+}
+.hero-badge-title { font-family: var(--font-display); color: var(--gold-2); font-size: 1.02rem; }
+.hero-badge-sub { color: var(--muted); font-size: 0.82rem; }
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.hero-scroll-hint::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 34px;
+  margin: 10px auto 0;
+  background: linear-gradient(var(--gold), transparent);
+  animation: hintDrop 2s ease-in-out infinite;
+}
+@keyframes hintDrop {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.mini-board {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.mini-board .msq { position: relative; display: flex; align-items: center; justify-content: center; }
+.mini-board .msq.light { background: #ead9b8; }
+.mini-board .msq.dark { background: #a67c46; }
+.mini-board .msq svg { width: 82%; height: 82%; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.28)); }
+
+/* ---------- О преподавателе ---------- */
+.about { background: var(--bg-2); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+}
+.photo-frame {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.photo-placeholder {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background:
+    radial-gradient(closest-side at 50% 35%, rgba(200,162,75,0.08), transparent),
+    var(--bg-2);
+  color: var(--muted);
+}
+.photo-glyph { font-size: 4.4rem; color: var(--gold); opacity: 0.85; }
+.photo-label { font-size: 0.85rem; letter-spacing: 0.06em; }
+.about-body .lead { font-size: 1.14rem; color: var(--ivory); }
+.about-body p + p { margin-top: 16px; }
+.about-body p { color: var(--muted); }
+.about-body strong { color: var(--ivory); }
+.profile-list { margin-top: 34px; border-top: 1px solid var(--line); }
+.profile-row {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.profile-row dt { color: var(--muted); font-size: 0.95rem; }
+.profile-row dd { color: var(--ivory); font-weight: 600; }
+
+/* ---------- Карточки программ ---------- */
+.cards-grid { display: grid; gap: 26px; }
+.cards-grid.three { grid-template-columns: repeat(3, 1fr); }
+.program-card, .price-card, .review-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 34px 30px;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+.program-card:hover, .price-card:hover, .review-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: var(--shadow);
+}
+.card-glyph {
+  font-size: 2.3rem;
+  color: var(--gold);
+  margin-bottom: 18px;
+  line-height: 1;
+}
+.card-desc { color: var(--muted); margin-top: 12px; font-size: 0.98rem; }
+.card-list { list-style: none; margin: 22px 0 26px; display: grid; gap: 10px; }
+.card-list li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--ivory-soft);
+  font-size: 0.96rem;
+}
+.card-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+/* ---------- Легенды ---------- */
+.legends { background: var(--bg-2); }
+.legend-board {
+  list-style: none;
+  max-width: 860px;
+  margin: 0 auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.legend-row {
+  display: grid;
+  grid-template-columns: 64px 56px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.2s ease;
+}
+.legend-row:last-child { border-bottom: 0; }
+.legend-row:hover { background: var(--gold-soft); }
+.legend-rank {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--muted);
+}
+.rank-1 .legend-rank, .rank-2 .legend-rank, .rank-3 .legend-rank { color: var(--gold-2); }
+.legend-mono {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  color: var(--gold-2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  background: var(--gold-soft);
+}
+.legend-info { display: grid; gap: 2px; }
+.legend-info strong { font-size: 1.05rem; font-family: var(--font-display); letter-spacing: 0.2px; }
+.legend-info span { color: var(--muted); font-size: 0.9rem; }
+.legend-status {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 6px 14px;
+  white-space: nowrap;
+  background: rgba(200, 162, 75, 0.06);
+}
+.legend-caption {
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 26px;
+  font-size: 0.95rem;
+}
+
+/* ---------- Шаги ---------- */
+.steps-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  counter-reset: step;
+}
+.step {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 34px 26px;
+  transition: transform 0.22s ease, border-color 0.22s ease;
+}
+.step:hover { transform: translateY(-6px); border-color: var(--gold); }
+.step-num {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--gold);
+  display: block;
+  margin-bottom: 18px;
+  line-height: 1;
+}
+.step h3 { margin-bottom: 10px; }
+.step p { color: var(--muted); font-size: 0.96rem; }
+
+/* ---------- Доска ---------- */
+.board-section { background: var(--bg-2); }
+.board-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 40px;
+  align-items: start;
+}
+.board-frame { position: relative; }
+.chessboard {
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  user-select: none;
+  touch-action: manipulation;
+}
+.square {
+  position: relative;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: inherit;
+}
+.square.light { background: #ecd9b6; }
+.square.dark { background: #a1753e; }
+.square:focus-visible { outline: 3px solid var(--gold-2); outline-offset: -3px; z-index: 2; }
+.square .piece-svg { width: 82%; height: 82%; pointer-events: none; filter: drop-shadow(0 3px 3px rgba(0,0,0,0.3)); transition: transform 0.12s ease; }
+.square.drag-src .piece-svg { opacity: 0.25; }
+.square.selected { background: #d8b45e !important; }
+.square.selected::after {
+  content: '';
+  position: absolute; inset: 0;
+  border: 3px solid var(--gold);
+  box-sizing: border-box;
+}
+.square.last-from::before, .square.last-to::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(200, 162, 75, 0.32);
+}
+.square.hint-move::after {
+  content: '';
+  width: 26%;
+  height: 26%;
+  border-radius: 50%;
+  background: rgba(20, 17, 12, 0.32);
+  position: absolute;
+}
+.square.hint-capture::after {
+  content: '';
+  position: absolute; inset: 6%;
+  border: 4px solid rgba(20, 17, 12, 0.35);
+  border-radius: 50%;
+}
+.square.in-check { background: #c96a4a !important; }
+.square .coord {
+  position: absolute;
+  font-size: clamp(8px, 1.3vw, 11px);
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.square .coord.rank { top: 3px; left: 4px; }
+.square .coord.file { bottom: 2px; right: 5px; }
+.square.light .coord { color: #a1753e; }
+.square.dark .coord { color: #ecd9b6; }
+
+.drag-ghost {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+  width: 70px;
+  height: 70px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.45));
+}
+.drag-ghost svg { width: 100%; height: 100%; }
+
+.promotion-modal {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 12, 8, 0.78);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border-radius: var(--radius-sm);
+  z-index: 5;
+}
+.promotion-modal[hidden] { display: none; }
+.promotion-modal p { font-family: var(--font-display); font-size: 1.15rem; color: var(--ivory); }
+.promotion-choices { display: flex; gap: 14px; }
+.promotion-choices button {
+  width: 72px; height: 72px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gold);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.promotion-choices button:hover { transform: translateY(-3px); background: var(--gold-soft); }
+.promotion-choices svg { width: 82%; height: 82%; }
+
+.board-side {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  display: grid;
+  gap: 20px;
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+}
+.board-status {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--gold-2);
+  text-align: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: rgba(200, 162, 75, 0.06);
+}
+.board-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.board-controls #btnFlip { grid-column: 1 / -1; }
+.captured-box { display: grid; gap: 8px; font-size: 0.92rem; }
+.captured-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.captured-label { color: var(--muted); }
+.captured-pieces { display: inline-flex; flex-wrap: wrap; gap: 2px; min-height: 22px; }
+.captured-pieces svg { width: 22px; height: 22px; }
+.move-list-wrap h3 { font-size: 1.05rem; margin-bottom: 12px; color: var(--ivory); }
+.move-list {
+  list-style: none;
+  max-height: 220px;
+  overflow-y: auto;
+  display: grid;
+  gap: 6px;
+  padding-right: 6px;
+  font-size: 0.95rem;
+  color: var(--ivory-soft);
+}
+.move-list li {
+  display: flex;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--bg-2);
+}
+.move-list .mnum { color: var(--gold-2); min-width: 24px; }
+.move-empty { color: var(--muted); font-style: italic; background: none !important; }
+
+/* ---------- Цены ---------- */
+.pricing-grid { align-items: stretch; }
+.price-card { display: flex; flex-direction: column; position: relative; }
+.price-card.featured { border-color: var(--gold); background: linear-gradient(180deg, rgba(200,162,75,0.10), var(--surface) 45%); }
+.featured-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--gold-2), var(--gold));
+  color: #211a0d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.price-desc { color: var(--muted); margin-top: 10px; font-size: 0.96rem; }
+.price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--gold-2);
+  margin: 20px 0 4px;
+}
+.price-card .card-list { flex: 1; }
+.price-card .btn { margin-top: 8px; }
+
+/* ---------- Отзывы ---------- */
+.testimonials { background: var(--bg-2); }
+.demo-note {
+  max-width: 720px;
+  margin: -30px auto 40px;
+  text-align: center;
+  color: var(--gold-2);
+  font-size: 0.92rem;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 20px;
+  background: rgba(200, 162, 75, 0.05);
+}
+.review-card { display: flex; flex-direction: column; gap: 22px; margin: 0; }
+.review-text { color: var(--ivory-soft); font-size: 0.99rem; flex: 1; }
+.review-card footer { display: grid; gap: 2px; border-top: 1px solid var(--line); padding-top: 16px; }
+.review-card footer strong { color: var(--gold-2); font-family: var(--font-display); letter-spacing: 0.3px; }
+.review-card footer span { color: var(--muted); font-size: 0.85rem; }
+
+/* ---------- Форма ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 40px;
+  align-items: start;
+}
+.booking-form {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 38px;
+  display: grid;
+  gap: 20px;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.form-field { display: grid; gap: 8px; }
+.form-field label { font-size: 0.95rem; color: var(--ivory-soft); font-weight: 600; }
+.req { color: var(--gold-2); }
+.form-field input,
+.form-field select,
+.form-field textarea {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ivory);
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 13px 16px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  width: 100%;
+}
+.form-field select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--gold-2) 50%), linear-gradient(135deg, var(--gold-2) 50%, transparent 50%); background-position: calc(100% - 21px) 50%, calc(100% - 15px) 50%; background-size: 6px 6px; background-repeat: no-repeat; }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200, 162, 75, 0.18);
+}
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(179, 167, 141, 0.55); }
+.form-field .invalid { border-color: var(--danger); }
+.field-error { color: var(--danger); font-size: 0.85rem; min-height: 1.2em; }
+.btn-submit { width: 100%; padding: 16px; position: relative; }
+.btn-submit-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(33, 26, 13, 0.35);
+  border-top-color: #211a0d;
+  border-radius: 50%;
+  display: none;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn-submit.loading .btn-submit-spinner { display: inline-block; }
+.btn-submit.loading { opacity: 0.85; pointer-events: none; }
+.form-status { display: none; border-radius: var(--radius-sm); padding: 14px 18px; font-size: 0.97rem; }
+.form-status.show { display: block; }
+.form-status.ok { background: rgba(158, 196, 154, 0.12); border: 1px solid rgba(158, 196, 154, 0.5); color: var(--ok); }
+.form-status.error { background: rgba(217, 143, 122, 0.12); border: 1px solid rgba(217, 143, 122, 0.5); color: var(--danger); }
+.form-status.info { background: var(--gold-soft); border: 1px solid var(--line); color: var(--ivory-soft); }
+.form-status a { color: var(--gold-2); font-weight: 600; }
+
+.contact-aside {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  display: grid;
+  gap: 18px;
+  position: sticky;
+  top: calc(var(--header-h) + 20px);
+}
+.contact-aside h3 { color: var(--ivory); }
+.contact-aside > p { color: var(--muted); font-size: 0.96rem; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-weight: 600;
+  color: var(--ivory-soft);
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+.contact-link:hover { border-color: var(--gold); background: var(--gold-soft); transform: translateY(-2px); }
+.contact-ico { color: var(--gold-2); font-size: 1.15rem; }
+.contact-note { border-top: 1px solid var(--line); padding-top: 18px; }
+.contact-note strong { color: var(--gold-2); display: block; margin-bottom: 10px; font-family: var(--font-display); }
+.contact-note ol { margin-left: 20px; color: var(--muted); font-size: 0.93rem; display: grid; gap: 6px; }
+
+/* ---------- Подвал ---------- */
+.site-footer { background: #0f0d09; border-top: 1px solid var(--line); padding: 56px 0 0; }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 44px;
+}
+.footer-brand .logo-mark { font-size: 2.2rem; display: block; margin-bottom: 10px; }
+.footer-name { font-family: var(--font-display); font-size: 1.15rem; color: var(--ivory); }
+.footer-tag { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+.footer-nav { display: grid; gap: 10px; align-content: start; }
+.footer-nav a { color: var(--muted); text-decoration: none; font-size: 0.96rem; transition: color 0.18s ease; }
+.footer-nav a:hover { color: var(--gold-2); }
+.footer-contacts { color: var(--muted); font-size: 0.96rem; display: grid; gap: 14px; align-content: start; }
+.footer-social { display: flex; gap: 18px; }
+.footer-social a { color: var(--gold-2); text-decoration: none; font-weight: 600; }
+.footer-social a:hover { text-decoration: underline; }
+.footer-bottom {
+  border-top: 1px solid var(--line);
+  padding-top: 22px;
+  padding-bottom: 26px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* ---------- Анимация появления ---------- */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+  .hero-board, .hero-badge, .hero-scroll-hint::after { animation: none; }
+}
+
+/* ---------- Адаптив ---------- */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 52px; }
+  .hero { min-height: auto; }
+  .about-grid { grid-template-columns: 1fr; gap: 44px; }
+  .about-photo { max-width: 400px; }
+  .cards-grid.three { grid-template-columns: 1fr 1fr; }
+  .steps-grid { grid-template-columns: 1fr 1fr; }
+  .board-layout { grid-template-columns: 1fr; }
+  .board-side { position: static; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-aside { position: static; }
+}
+@media (max-width: 768px) {
+  .section { padding: 72px 0; }
+  .nav-toggle { display: flex; }
+  .main-nav {
+    position: fixed;
+    top: var(--header-h);
+    right: 0;
+    left: 0;
+    background: rgba(18, 15, 10, 0.98);
+    border-bottom: 1px solid var(--line);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 12px 24px 20px;
+    transform: translateY(-130%);
+    transition: transform 0.28s ease;
+    z-index: 99;
+  }
+  .main-nav.open { transform: translateY(0); }
+  .main-nav a { padding: 13px 4px; border-bottom: 1px solid rgba(200,162,75,0.08); }
+  .nav-cta { text-align: center; margin-top: 12px; border-bottom: 0 !important; }
+  .cards-grid.three { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .legend-row { grid-template-columns: 40px 48px 1fr; }
+  .legend-status { grid-column: 3; justify-self: start; margin-top: 4px; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  .booking-form { padding: 26px 20px; }
+  .hero-badge { left: 0; bottom: 16px; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- ======================= ШАПКА ======================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#hero" class="logo" aria-label="На главную">
+        <span class="logo-mark" aria-hidden="true">♞</span>
+        <span class="logo-text" data-cfg="coachName">Гафуров Умид</span>
+      </a>
+      <nav class="main-nav" id="mainNav" aria-label="Основная навигация">
+        <a href="#about">О преподавателе</a>
+        <a href="#programs">Программы</a>
+        <a href="#board">Доска</a>
+        <a href="#pricing">Цены</a>
+        <a href="#testimonials">Отзывы</a>
+        <a href="#contact" class="nav-cta">Записаться</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ======================= ГЕРОЙ ======================= -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-text reveal">
+          <p class="hero-eyebrow">Частный преподаватель шахмат</p>
+          <h1>Шахматы — это искусство думать на&nbsp;несколько ходов вперёд</h1>
+          <p class="hero-subtitle">Индивидуальные занятия по шахматам для начинающих и опытных игроков. Развивайте стратегическое мышление, учитесь видеть комбинации и побеждать осознанно.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-gold">Записаться на занятие</a>
+            <a href="#programs" class="btn btn-outline">Программа обучения</a>
+          </div>
+          <ul class="hero-points">
+            <li>Индивидуальная программа под ваш уровень</li>
+            <li>Онлайн и очно — на ваш выбор</li>
+            <li>Анализ ваших партий и домашние задания</li>
+          </ul>
+        </div>
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="hero-board-wrap">
+            <div class="hero-board" id="heroBoard"></div>
+            <div class="hero-badge">
+              <span class="hero-badge-title">Индивидуальный подход</span>
+              <span class="hero-badge-sub">от первых ходов до турнирной практики</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-scroll-hint" aria-hidden="true">листайте вниз</div>
+    </section>
+
+    <!-- ======================= О ПРЕПОДАВАТЕЛЕ ======================= -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">О преподавателе</span>
+          <h2>Ваш проводник в&nbsp;мире шахмат</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-photo reveal">
+            <div class="photo-frame">
+              <div class="photo-placeholder">
+                <span class="photo-glyph" aria-hidden="true">♞</span>
+                <span class="photo-label">Гафуров Умид</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-body reveal">
+            <p class="lead">Меня зовут <strong data-cfg="coachName">Гафуров Умид</strong>, и я помогаю людям полюбить шахматы — глубоко, осознанно и надолго. Мой принцип прост: шахматы невозможно выучить наизусть, их можно только понять.</p>
+            <p>На занятиях мы разбираем позиции, а не зубрим дебютные линии. Я учу видеть логику доски: почему фигура стоит именно здесь, какой план сильнее и где прячется тактика. Такое понимание остаётся с вами в каждой партии — и в шахматах, и за пределами доски: стратегическое мышление работает везде.</p>
+            <p>Каждый ученик получает индивидуальный маршрут: под ваш уровень, темп и цели. Кто-то готовится к турниру, кто-то играет с внуками, а кто-то открывает для себя шахматы с нуля. Всем им — свой путь и моя полная вовлечённость.</p>
+            <dl class="profile-list">
+              <div class="profile-row"><dt>Имя преподавателя</dt><dd data-cfg="coachName">Гафуров Умид</dd></div>
+              <div class="profile-row"><dt>Рейтинг FIDE</dt><dd data-cfg="fideRating">Укажите рейтинг, если есть</dd></div>
+              <div class="profile-row"><dt>Опыт преподавания</dt><dd data-cfg="experience">Более 5 лет</dd></div>
+              <div class="profile-row"><dt>Формат занятий</dt><dd data-cfg="lessonFormat">Онлайн / очно</dd></div>
+              <div class="profile-row"><dt>Языки преподавания</dt><dd data-cfg="languages">Русский, узбекский</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ПРОГРАММЫ ======================= -->
+    <section class="section programs" id="programs">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Программы обучения</span>
+          <h2>Программа под ваш уровень</h2>
+          <p class="section-sub">Три уровня — от первых шагов до турнирной подготовки. На пробном занятии определим ваш уровень и подберём программу.</p>
+        </div>
+        <div class="cards-grid three">
+          <article class="program-card reveal">
+            <div class="card-glyph" aria-hidden="true">♙</div>
+            <h3>Начинающий</h3>
+            <p class="card-desc">Для тех, кто делает первые шаги на доске: от правил до первых осознанных побед.</p>
+            <ul class="card-list">
+              <li>Правила игры и основы шахмат</li>
+              <li>Шахматная нотация</li>
+              <li>Мат в один и два хода</li>
+              <li>Основные тактические приёмы</li>
+            </ul>
+            <a href="#contact" class="btn btn-card" data-level="Начинающий">Выбрать программу</a>
+          </article>
+          <article class="program-card reveal">
+            <div class="card-glyph" aria-hidden="true">♘</div>
+            <h3>Продолжающий</h3>
+            <p class="card-desc">Для игроков, которые знают правила и хотят играть сильнее и увереннее.</p>
+            <ul class="card-list">
+              <li>Тактика и комбинационное зрение</li>
+              <li>Дебютные принципы</li>
+              <li>Стратегия и позиционная игра</li>
+              <li>Типичные ошибки и их исправление</li>
+            </ul>
+            <a href="#contact" class="btn btn-card" data-level="Продолжающий">Выбрать программу</a>
+          </article>
+          <article class="program-card reveal">
+            <div class="card-glyph" aria-hidden="true">♜</div>
+            <h3>Продвинутый</h3>
+            <p class="card-desc">Для опытных игроков: глубина анализа, репертуар и турнирный результат.</p>
+            <ul class="card-list">
+              <li>Глубокий анализ позиций</li>
+              <li>Репертуар дебютов</li>
+              <li>Расчёт вариантов</li>
+              <li>Эндшпиль и турнирная подготовка</li>
+            </ul>
+            <a href="#contact" class="btn btn-card" data-level="Продвинутый">Выбрать программу</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ЛЕГЕНДЫ ======================= -->
+    <section class="section legends" id="legends">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Доска почёта</span>
+          <h2>Те, кому ещё не&nbsp;удалось меня победить</h2>
+          <p class="section-sub">Выдающиеся шахматисты планеты. Все они пока не оставили мне ни одного очка.</p>
+        </div>
+        <ol class="legend-board reveal">
+          <li class="legend-row rank-1"><span class="legend-rank">1</span><span class="legend-mono">МК</span><div class="legend-info"><strong>Магнус Карлсен</strong><span>Чемпион мира · не смог победить ни разу</span></div><span class="legend-status">0 поражений у автора сайта</span></li>
+          <li class="legend-row rank-2"><span class="legend-rank">2</span><span class="legend-mono">ХН</span><div class="legend-info"><strong>Хикару Накамура</strong><span>Гроссмейстер · не ответил на мой вызов</span></div><span class="legend-status">в очереди на партию</span></li>
+          <li class="legend-row rank-3"><span class="legend-rank">3</span><span class="legend-mono">ФК</span><div class="legend-info"><strong>Фабиано Каруана</strong><span>Претендент на титул · обходит мою доску стороной</span></div><span class="legend-status">0 попыток</span></li>
+          <li class="legend-row"><span class="legend-rank">4</span><span class="legend-mono">ДЛ</span><div class="legend-info"><strong>Дин Лижэнь</strong><span>Гроссмейстер · продолжает избегать встречи</span></div><span class="legend-status">в очереди на партию</span></li>
+          <li class="legend-row"><span class="legend-rank">5</span><span class="legend-mono">АФ</span><div class="legend-info"><strong>Алиреза Фируджа</strong><span>Юный гений · пока не рискует</span></div><span class="legend-status">в очереди на партию</span></li>
+          <li class="legend-row"><span class="legend-rank">6</span><span class="legend-mono">ГК</span><div class="legend-info"><strong>Гарри Каспаров</strong><span>13-й чемпион мира · ушёл из шахмат раньше, чем встретил меня</span></div><span class="legend-status">счёт 0:0</span></li>
+          <li class="legend-row"><span class="legend-rank">7</span><span class="legend-mono">БФ</span><div class="legend-info"><strong>Бобби Фишер</strong><span>Величайший американец · исторически не успел</span></div><span class="legend-status">счёт 0:0</span></li>
+        </ol>
+        <p class="legend-caption reveal">Разумеется, это шуточный список. С настоящими легендами шахмат всё немного сложнее!</p>
+      </div>
+    </section>
+
+    <!-- ======================= КАК ПРОХОДЯТ ЗАНЯТИЯ ======================= -->
+    <section class="section process" id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Как проходят занятия</span>
+          <h2>Четыре шага к&nbsp;уверенной игре</h2>
+        </div>
+        <ol class="steps-grid">
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">01</span>
+            <h3>Знакомство</h3>
+            <p>Определяем ваш уровень, цели и то, что мешает играть сильнее.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">02</span>
+            <h3>Индивидуальный план</h3>
+            <p>Подбираем программу обучения под ваши задачи и темп.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">03</span>
+            <h3>Практика</h3>
+            <p>Разбираем партии, решаем задачи и тренируемся в игре.</p>
+          </li>
+          <li class="step reveal">
+            <span class="step-num" aria-hidden="true">04</span>
+            <h3>Анализ прогресса</h3>
+            <p>Отслеживаем результаты и корректируем программу.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ======================= ИНТЕРАКТИВНАЯ ДОСКА ======================= -->
+    <section class="section board-section" id="board">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Потренируйтесь</span>
+          <h2>Шахматная доска</h2>
+          <p class="section-sub">Играйте за белых и чёрных прямо на сайте: все ходы проверяются по правилам шахмат.</p>
+        </div>
+        <div class="board-layout reveal">
+          <div class="board-main">
+            <div class="board-frame">
+              <div class="chessboard" id="chessboard" role="grid" aria-label="Интерактивная шахматная доска"></div>
+              <div class="promotion-modal" id="promotionModal" role="dialog" aria-modal="true" aria-label="Выбор фигуры для превращения пешки" hidden>
+                <p>Превращение пешки</p>
+                <div class="promotion-choices" id="promotionChoices"></div>
+              </div>
+            </div>
+          </div>
+          <aside class="board-side">
+            <div class="board-status" id="boardStatus" aria-live="polite">Ход белых</div>
+            <div class="board-controls">
+              <button class="btn btn-small" id="btnUndo" type="button">Отменить ход</button>
+              <button class="btn btn-small" id="btnReset" type="button">Сбросить позицию</button>
+              <button class="btn btn-small" id="btnFlip" type="button">Перевернуть доску</button>
+            </div>
+            <div class="captured-box">
+              <div class="captured-row"><span class="captured-label">У белых пленены:</span><span class="captured-pieces" id="capturedByWhite"></span></div>
+              <div class="captured-row"><span class="captured-label">У чёрных пленены:</span><span class="captured-pieces" id="capturedByBlack"></span></div>
+            </div>
+            <div class="move-list-wrap">
+              <h3>Ходы партии</h3>
+              <ol class="move-list" id="moveList"><li class="move-empty">Ходов пока нет</li></ol>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ЦЕНЫ ======================= -->
+    <section class="section pricing" id="pricing">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Стоимость</span>
+          <h2>Цены на занятия</h2>
+          <p class="section-sub">Стоимость указана в узбекских сумах (UZS). Точные цены уточняйте при записи.</p>
+        </div>
+        <div class="cards-grid three pricing-grid">
+          <article class="price-card reveal">
+            <h3>Пробное занятие</h3>
+            <p class="price-desc">Знакомство, определение уровня и план обучения.</p>
+            <p class="price"><span data-cfg="priceTrial">— сум</span></p>
+            <ul class="card-list">
+              <li>Длительность — 45–60 минут</li>
+              <li>Определение уровня игры</li>
+              <li>Персональные рекомендации</li>
+            </ul>
+            <a href="#contact" class="btn btn-card" data-plan="Пробное занятие">Записаться</a>
+          </article>
+          <article class="price-card featured reveal">
+            <span class="featured-badge">Рекомендуем</span>
+            <h3>Пакет занятий</h3>
+            <p class="price-desc">Системные занятия с домашними заданиями и анализом прогресса.</p>
+            <p class="price"><span data-cfg="pricePack">— сум</span></p>
+            <ul class="card-list">
+              <li>Выгоднее, чем разовые занятия</li>
+              <li>Индивидуальная программа</li>
+              <li>Домашние задания и разбор партий</li>
+            </ul>
+            <a href="#contact" class="btn btn-gold" data-plan="Пакет занятий">Записаться</a>
+          </article>
+          <article class="price-card reveal">
+            <h3>Индивидуальное занятие</h3>
+            <p class="price-desc">Разовое занятие по вашему уровню и целям.</p>
+            <p class="price"><span data-cfg="priceSingle">— сум</span></p>
+            <ul class="card-list">
+              <li>Длительность — 60 минут</li>
+              <li>Полностью индивидуальный формат</li>
+              <li>Онлайн или очно</li>
+            </ul>
+            <a href="#contact" class="btn btn-card" data-plan="Индивидуальное занятие">Записаться</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ОТЗЫВЫ ======================= -->
+    <section class="section testimonials" id="testimonials">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Отзывы</span>
+          <h2>Что говорят ученики</h2>
+        </div>
+        <div class="demo-note reveal">Материалы этого раздела — демонстрационные: здесь появятся реальные отзывы учеников.</div>
+        <div class="cards-grid three">
+          <blockquote class="review-card reveal">
+            <p class="review-text">«Пример текста отзыва: расскажите, как изменилась ваша игра, что понравилось в занятиях и какой результат вы получили.»</p>
+            <footer><strong>Имя ученика</strong><span>Уровень · например, начинающий</span></footer>
+          </blockquote>
+          <blockquote class="review-card reveal">
+            <p class="review-text">«Второй пример отзыва: здесь может быть история подготовки к турниру, рост рейтинга или первые победы над сильными соперниками.»</p>
+            <footer><strong>Имя ученика</strong><span>Уровень · например, продолжающий</span></footer>
+          </blockquote>
+          <blockquote class="review-card reveal">
+            <p class="review-text">«Третий пример отзыва: пара слов о формате занятий, атмосфере и том, что особенно помогло в обучении.»</p>
+            <footer><strong>Имя ученика</strong><span>Уровень · например, продвинутый</span></footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= ЗАПИСЬ ======================= -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Запись</span>
+          <h2>Записаться на занятие</h2>
+          <p class="section-sub">Заполните форму — я свяжусь с вами, отвечу на вопросы и подберём удобное время.</p>
+        </div>
+        <div class="contact-grid">
+          <form class="booking-form reveal" id="bookingForm" novalidate>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="fName">Имя <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="fName" name="name" autocomplete="name" placeholder="Как к вам обращаться">
+                <span class="field-error" id="errName"></span>
+              </div>
+              <div class="form-field">
+                <label for="fAge">Возраст ученика <span class="req" aria-hidden="true">*</span></label>
+                <input type="number" id="fAge" name="age" min="4" max="100" inputmode="numeric" placeholder="Например: 10">
+                <span class="field-error" id="errAge"></span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="fLevel">Текущий уровень игры</label>
+                <select id="fLevel" name="level">
+                  <option value="Не знаю свой уровень" selected>Не знаю свой уровень</option>
+                  <option value="Начинающий">Начинающий</option>
+                  <option value="Продолжающий">Продолжающий</option>
+                  <option value="Продвинутый">Продвинутый</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="fFormat">Желаемый формат занятий</label>
+                <select id="fFormat" name="format">
+                  <option value="Онлайн" selected>Онлайн</option>
+                  <option value="Очно">Очно</option>
+                  <option value="Гибрид">Гибрид</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="fTime">Удобное время</label>
+                <input type="text" id="fTime" name="time" placeholder="Например: будни после 18:00, выходные">
+              </div>
+              <div class="form-field">
+                <label for="fContact">Контакт для связи <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="fContact" name="contact" autocomplete="tel" placeholder="Телефон или ник в Telegram">
+                <span class="field-error" id="errContact"></span>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="fComment">Комментарий (необязательно)</label>
+              <textarea id="fComment" name="comment" rows="3" placeholder="Цели, пожелания, вопросы…"></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold btn-submit" id="btnSubmit">
+              <span class="btn-submit-label">Отправить заявку</span>
+              <span class="btn-submit-spinner" aria-hidden="true"></span>
+            </button>
+            <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+          </form>
+          <aside class="contact-aside reveal">
+            <h3>Свяжитесь со мной напрямую</h3>
+            <p>Предпочитаете мессенджеры? Напишите — отвечу быстрее, чем ход конём на f3.</p>
+            <a class="contact-link" id="telegramLink" href="#" target="_blank" rel="noopener">
+              <span class="contact-ico" aria-hidden="true">✈</span> Написать в Telegram
+            </a>
+            <a class="contact-link" id="whatsappLink" href="#" target="_blank" rel="noopener">
+              <span class="contact-ico" aria-hidden="true">✆</span> Написать в WhatsApp
+            </a>
+            <div class="contact-note">
+              <strong>Что будет дальше?</strong>
+              <ol>
+                <li>Обсудим ваши цели и уровень.</li>
+                <li>Договоримся о времени пробного занятия.</li>
+                <li>Начнём учиться — спокойно и с удовольствием.</li>
+              </ol>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================= ПОДВАЛ ======================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <span class="logo-mark" aria-hidden="true">♞</span>
+        <p class="footer-name" data-cfg="coachName">Гафуров Умид</p>
+        <p class="footer-tag">Частный преподаватель шахмат</p>
+      </div>
+      <nav class="footer-nav" aria-label="Навигация в подвале">
+        <a href="#about">О преподавателе</a>
+        <a href="#programs">Программы</a>
+        <a href="#board">Доска</a>
+        <a href="#pricing">Цены</a>
+        <a href="#contact">Запись</a>
+      </nav>
+      <div class="footer-contacts">
+        <p>Контакты: <span data-cfg="contactInfo">+998 90 123-45-67</span></p>
+        <div class="footer-social">
+          <a id="telegramLinkFooter" href="#" target="_blank" rel="noopener">Telegram</a>
+          <a id="whatsappLinkFooter" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© <span id="year"></span> <span data-cfg="coachName">Гафуров Умид</span>. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <script>
+/* ============================================================
+   КОНФИГУРАЦИЯ САЙТА
+   ============================================================ */
+'use strict';
+
+window.SITE_CONFIG = {
+  coachName: 'Гафуров Умид',
+  fideRating: 'Укажите рейтинг, если есть',
+  experience: 'Более 5 лет',
+  lessonFormat: 'Онлайн / очно',
+  languages: 'Русский, узбекский',
+  contactInfo: '+998 90 123-45-67',
+
+  telegram: 'https://t.me/your_username',
+  whatsapp: 'https://wa.me/998901234567',
+
+  priceTrial: 'По запросу',
+  priceSingle: 'По запросу',
+  pricePack: 'По запросу',
+
+  bookingEndpoint: ''
+};
+
+/* ============================================================
+   ШАХМАТНЫЙ ДВИЖОК
+   ============================================================ */
+class ChessGame {
+  constructor() { this.reset(); }
+
+  reset() {
+    this.board = new Array(64).fill(null);
+    const back = ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'];
+    for (let c = 0; c < 8; c++) {
+      this.board[c] = back[c].toLowerCase();
+      this.board[8 + c] = 'p';
+      this.board[48 + c] = 'P';
+      this.board[56 + c] = back[c];
+    }
+    this.turn = 'w';
+    this.castling = { K: true, Q: true, k: true, q: true };
+    this.ep = -1;
+    this.history = [];
+    this.moveList = [];
+  }
+
+  idx(r, c) { return r * 8 + c; }
+  rc(i) { return [Math.floor(i / 8), i % 8]; }
+  colorOf(p) { return p ? (p === p.toUpperCase() ? 'w' : 'b') : null; }
+  opp(color) { return color === 'w' ? 'b' : 'w'; }
+
+  kingIndex(color) {
+    const target = color === 'w' ? 'K' : 'k';
+    for (let i = 0; i < 64; i++) if (this.board[i] === target) return i;
+    return -1;
+  }
+
+  isAttacked(i, byColor) {
+    const b = this.board;
+    const [r, c] = this.rc(i);
+    const pr = byColor === 'w' ? r + 1 : r - 1;
+    for (const dc of [-1, 1]) {
+      const nc = c + dc;
+      if (pr >= 0 && pr < 8 && nc >= 0 && nc < 8) {
+        const p = b[this.idx(pr, nc)];
+        if (p && this.colorOf(p) === byColor && p.toUpperCase() === 'P') return true;
+      }
+    }
+    for (const [dr, dc] of [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]]) {
+      const nr = r + dr, nc = c + dc;
+      if (nr < 0 || nr > 7 || nc < 0 || nc > 7) continue;
+      const p = b[this.idx(nr, nc)];
+      if (p && this.colorOf(p) === byColor && p.toUpperCase() === 'N') return true;
+    }
+    for (const [dr, dc] of [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]) {
+      const nr = r + dr, nc = c + dc;
+      if (nr < 0 || nr > 7 || nc < 0 || nc > 7) continue;
+      const p = b[this.idx(nr, nc)];
+      if (p && this.colorOf(p) === byColor && p.toUpperCase() === 'K') return true;
+    }
+    for (const [dr, dc] of [[-1,-1],[-1,1],[1,-1],[1,1]]) {
+      let nr = r + dr, nc = c + dc;
+      while (nr >= 0 && nr < 8 && nc >= 0 && nc < 8) {
+        const p = b[this.idx(nr, nc)];
+        if (p) {
+          if (this.colorOf(p) === byColor && (p.toUpperCase() === 'B' || p.toUpperCase() === 'Q')) return true;
+          break;
+        }
+        nr += dr; nc += dc;
+      }
+    }
+    for (const [dr, dc] of [[-1,0],[1,0],[0,-1],[0,1]]) {
+      let nr = r + dr, nc = c + dc;
+      while (nr >= 0 && nr < 8 && nc >= 0 && nc < 8) {
+        const p = b[this.idx(nr, nc)];
+        if (p) {
+          if (this.colorOf(p) === byColor && (p.toUpperCase() === 'R' || p.toUpperCase() === 'Q')) return true;
+          break;
+        }
+        nr += dr; nc += dc;
+      }
+    }
+    return false;
+  }
+
+  pseudoMoves(i) {
+    const b = this.board;
+    const p = b[i];
+    if (!p) return [];
+    const color = this.colorOf(p);
+    const enemy = this.opp(color);
+    const type = p.toUpperCase();
+    const [r, c] = this.rc(i);
+    const moves = [];
+
+    const push = (to, extra) => {
+      const t = b[to];
+      if (!t || this.colorOf(t) !== color) moves.push(Object.assign({ from: i, to, piece: p, captured: t || null }, extra));
+    };
+
+    if (type === 'P') {
+      const dir = color === 'w' ? -1 : 1;
+      const startRow = color === 'w' ? 6 : 1;
+      const promoRow = color === 'w' ? 0 : 7;
+      const nr = r + dir;
+      if (nr >= 0 && nr < 8) {
+        const one = this.idx(nr, c);
+        if (!b[one]) {
+          moves.push({ from: i, to: one, piece: p, captured: null, promotion: nr === promoRow ? 'Q' : null });
+          const two = this.idx(r + 2 * dir, c);
+          if (r === startRow && !b[two]) moves.push({ from: i, to: two, piece: p, captured: null, double: true });
+        }
+        for (const dc of [-1, 1]) {
+          const nc = c + dc;
+          if (nc < 0 || nc > 7) continue;
+          const to = this.idx(nr, nc);
+          const t = b[to];
+          if (t && this.colorOf(t) !== color) {
+            moves.push({ from: i, to, piece: p, captured: t, promotion: nr === promoRow ? 'Q' : null });
+          } else if (!t && to === this.ep) {
+            moves.push({ from: i, to, piece: p, captured: b[to - dir * 8], enpassant: true });
+          }
+        }
+      }
+    } else if (type === 'N') {
+      for (const [dr, dc] of [[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]]) {
+        const nr = r + dr, nc = c + dc;
+        if (nr < 0 || nr > 7 || nc < 0 || nc > 7) continue;
+        push(this.idx(nr, nc));
+      }
+    } else if (type === 'K') {
+      for (const [dr, dc] of [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]) {
+        const nr = r + dr, nc = c + dc;
+        if (nr < 0 || nr > 7 || nc < 0 || nc > 7) continue;
+        push(this.idx(nr, nc));
+      }
+      const homeRow = color === 'w' ? 7 : 0;
+      const home = this.idx(homeRow, 4);
+      if (i === home && !this.isAttacked(home, enemy)) {
+        const rK = color === 'w' ? 'K' : 'k';
+        const rQ = color === 'w' ? 'Q' : 'q';
+        if (this.castling[rK] && !b[home + 1] && !b[home + 2] &&
+            !this.isAttacked(home + 1, enemy) && !this.isAttacked(home + 2, enemy)) {
+          moves.push({ from: i, to: home + 2, piece: p, castle: 'K' });
+        }
+        if (this.castling[rQ] && !b[home - 1] && !b[home - 2] && !b[home - 3] &&
+            !this.isAttacked(home - 1, enemy) && !this.isAttacked(home - 2, enemy)) {
+          moves.push({ from: i, to: home - 2, piece: p, castle: 'Q' });
+        }
+      }
+    } else {
+      const dirs = type === 'B' ? [[-1,-1],[-1,1],[1,-1],[1,1]]
+        : type === 'R' ? [[-1,0],[1,0],[0,-1],[0,1]]
+        : [[-1,-1],[-1,1],[1,-1],[1,1],[-1,0],[1,0],[0,-1],[0,1]];
+      for (const [dr, dc] of dirs) {
+        let nr = r + dr, nc = c + dc;
+        while (nr >= 0 && nr < 8 && nc >= 0 && nc < 8) {
+          const to = this.idx(nr, nc);
+          if (!b[to]) {
+            moves.push({ from: i, to, piece: p, captured: null });
+          } else {
+            if (this.colorOf(b[to]) !== color) moves.push({ from: i, to, piece: p, captured: b[to] });
+            break;
+          }
+          nr += dr; nc += dc;
+        }
+      }
+    }
+    return moves;
+  }
+
+  legalMovesFrom(i) {
+    const p = this.board[i];
+    if (!p || this.colorOf(p) !== this.turn) return [];
+    const color = this.turn;
+    return this.pseudoMoves(i).filter(m => this._isLegal(m, color));
+  }
+
+  allLegalMoves(color) {
+    const out = [];
+    for (let i = 0; i < 64; i++) {
+      if (this.board[i] && this.colorOf(this.board[i]) === color) {
+        for (const m of this.pseudoMoves(i)) if (this._isLegal(m, color)) out.push(m);
+      }
+    }
+    return out;
+  }
+
+  _isLegal(m, color) {
+    this._push();
+    this._apply(m, color);
+    const ok = !this.isAttacked(this.kingIndex(color), this.opp(color));
+    this._pop();
+    return ok;
+  }
+
+  _push() {
+    this.history.push({
+      b: this.board.slice(),
+      turn: this.turn,
+      castling: Object.assign({}, this.castling),
+      ep: this.ep,
+      ml: this.moveList.length
+    });
+  }
+  _pop() {
+    const s = this.history.pop();
+    this.board = s.b;
+    this.turn = s.turn;
+    this.castling = s.castling;
+    this.ep = s.ep;
+    this.moveList.length = s.ml;
+  }
+
+  _apply(m, color) {
+    const b = this.board;
+    const promo = m.promotion || null;
+    b[m.to] = promo ? (color === 'w' ? promo.toUpperCase() : promo.toLowerCase()) : m.piece;
+    b[m.from] = null;
+    if (m.enpassant) b[m.to + (color === 'w' ? 8 : -8)] = null;
+    if (m.castle === 'K') { b[m.to - 1] = b[m.to + 1]; b[m.to + 1] = null; }
+    if (m.castle === 'Q') { b[m.to + 1] = b[m.to - 2]; b[m.to - 2] = null; }
+    this.ep = m.double ? m.from + (color === 'w' ? -8 : 8) : -1;
+    if (m.from === 60 || m.to === 60) { this.castling.K = false; this.castling.Q = false; }
+    if (m.from === 4 || m.to === 4) { this.castling.k = false; this.castling.q = false; }
+    if (m.from === 63 || m.to === 63) this.castling.K = false;
+    if (m.from === 56 || m.to === 56) this.castling.Q = false;
+    if (m.from === 7 || m.to === 7) this.castling.k = false;
+    if (m.from === 0 || m.to === 0) this.castling.q = false;
+    this.turn = this.opp(color);
+  }
+
+  make(m, promotion) {
+    const color = this.turn;
+    this._push();
+    if (promotion) m = Object.assign({}, m, { promotion });
+    this._apply(m, color);
+    this.moveList.push({ from: m.from, to: m.to, piece: m.piece, captured: m.captured || null, castle: m.castle || null, enpassant: !!m.enpassant, promotion: m.promotion || null, color });
+  }
+
+  undo() {
+    if (this.history.length === 0) return false;
+    this._pop();
+    return true;
+  }
+
+  status() {
+    const color = this.turn;
+    const enemy = this.opp(color);
+    const inCheck = this.isAttacked(this.kingIndex(color), enemy);
+    const hasMoves = this.allLegalMoves(color).length > 0;
+    if (!hasMoves) return inCheck ? { over: true, winner: enemy, checkmate: true } : { over: true, stalemate: true };
+    return { over: false, check: inCheck };
+  }
+}
+
+/* ============================================================
+   SVG-ФИГУРЫ
+   ============================================================ */
+const PieceSVG = {
+  paths: {
+    P: '<path d="M22 38c0-3.3 2.7-6 6-6s6 2.7 6 6c0 2.2-1.2 4.1-3 5.2v2.8h4v3h-14v-3h4v-2.8c-1.8-1.1-3-3-3-5.2zM17 45h14v2H17z"/>',
+    N: '<path d="M15 38c1-4 4-7 8-8 2-3 1-6-1-8 4 0 7 2 9 5 3 0 5 2 6 5 1 4-1 8-3 10 2 2 1 5-1 7h-18z"/>',
+    B: '<path d="M22 20c0-1.7 1.3-3 3-3s3 1.3 3 3c0 1.2-.7 2.2-1.7 2.7l3.7 10.3h-10l3.7-10.3c-1-.5-1.7-1.5-1.7-2.7zM16 38h18v3H16z"/>',
+    R: '<path d="M16 20h3v4h4v-4h4v4h4v-4h3v8H16zm2 10h14v10H18zm-2 11h18v4H16z"/>',
+    Q: '<path d="M15 22l3 12h14l3-12-5 6-5-8-5 8zM16 38h18v4H16z"/>',
+    K: '<path d="M23 16h4v3h3v4h-3v3h-4v-3h-3v-4h3zm-6 12h16l2 10H15zm-1 11h18v4H16z"/>'
+  },
+  svg(type, color, className = '') {
+    const path = this.paths[type.toUpperCase()] || '';
+    const fill = color === 'w' ? '#f5f0e6' : '#282219';
+    const stroke = color === 'w' ? '#3d3222' : '#d8c29d';
+    return `<svg class="${className}" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><g fill="${fill}" stroke="${stroke}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${path}</g></svg>`;
+  }
+};
+
+/* ============================================================
+   ИНТЕРАКТИВНАЯ ДОСКА
+   ============================================================ */
+const PieceNames = { K: 'Король', Q: 'Ферзь', R: 'Ладья', B: 'Слон', N: 'Конь', P: 'Пешка' };
+const FILES = 'abcdefgh';
+
+function squareName(i) {
+  const [r, c] = [Math.floor(i / 8), i % 8];
+  return FILES[c] + (8 - r);
+}
+
+class ChessBoardUI {
+  constructor(game, els) {
+    this.game = game;
+    this.boardEl = els.board;
+    this.statusEl = els.status;
+    this.moveListEl = els.moveList;
+    this.capturedByWhiteEl = els.capturedByWhite;
+    this.capturedByBlackEl = els.capturedByBlack;
+    this.promoModal = els.promotionModal;
+    this.promoChoices = els.promotionChoices;
+    this.flipped = false;
+    this.selected = -1;
+    this.legalCache = [];
+    this.lastMove = null;
+    this.squareEls = new Array(64).fill(null);
+    this.drag = null;
+    this._build();
+    this._bindPointer();
+    this.refresh();
+  }
+
+  _order() {
+    const order = [];
+    for (let d = 0; d < 64; d++) {
+      const dr = Math.floor(d / 8), dc = d % 8;
+      const r = this.flipped ? 7 - dr : dr;
+      const c = this.flipped ? 7 - dc : dc;
+      order.push(r * 8 + c);
+    }
+    return order;
+  }
+
+  _build() {
+    this.boardEl.innerHTML = '';
+    this._order().forEach(i => {
+      const [r, c] = [Math.floor(i / 8), i % 8];
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'square ' + (((r + c) % 2 === 0) ? 'light' : 'dark');
+      btn.dataset.square = i;
+      btn.setAttribute('role', 'gridcell');
+      if ((!this.flipped && c === 0) || (this.flipped && c === 7)) {
+        const span = document.createElement('span');
+        span.className = 'coord rank';
+        span.textContent = 8 - r;
+        btn.appendChild(span);
+      }
+      if ((!this.flipped && r === 7) || (this.flipped && r === 0)) {
+        const span = document.createElement('span');
+        span.className = 'coord file';
+        span.textContent = FILES[c];
+        btn.appendChild(span);
+      }
+      btn.addEventListener('click', () => this._onSquareClick(i));
+      this.boardEl.appendChild(btn);
+      this.squareEls[i] = btn;
+    });
+  }
+
+  _bindPointer() {
+    this.boardEl.addEventListener('pointerdown', (e) => {
+      const sqEl = e.target.closest('.square');
+      if (!sqEl || this._promoOpen) return;
+      const i = Number(sqEl.dataset.square);
+      const p = this.game.board[i];
+      if (!p || this.game.colorOf(p) !== this.game.turn) return;
+      this.drag = { from: i, x: e.clientX, y: e.clientY, moved: false, ghost: null };
+      this._select(i);
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!this.drag) return;
+      const dx = e.clientX - this.drag.x, dy = e.clientY - this.drag.y;
+      if (!this.drag.moved && Math.hypot(dx, dy) > 8) {
+        this.drag.moved = true;
+        this.drag.ghost = document.createElement('div');
+        this.drag.ghost.className = 'drag-ghost';
+        this.drag.ghost.innerHTML = PieceSVG.svg(this.game.board[this.drag.from].toUpperCase(), this.game.turn);
+        document.body.appendChild(this.drag.ghost);
+        this.squareEls[this.drag.from].classList.add('drag-src');
+      }
+      if (this.drag.moved && this.drag.ghost) {
+        this.drag.ghost.style.left = e.clientX + 'px';
+        this.drag.ghost.style.top = e.clientY + 'px';
+      }
+    });
+    window.addEventListener('pointerup', (e) => {
+      if (!this.drag) return;
+      const drag = this.drag;
+      this.drag = null;
+      if (drag.ghost) drag.ghost.remove();
+      this.squareEls[drag.from].classList.remove('drag-src');
+      if (!drag.moved) return;
+      const rect = this.boardEl.getBoundingClientRect();
+      const size = rect.width / 8;
+      const c = Math.floor((e.clientX - rect.left) / size);
+      const dr = Math.floor((e.clientY - rect.top) / size);
+      if (dr < 0 || dr > 7 || c < 0 || c > 7) { this._clearSelection(); this.refresh(); return; }
+      const r = this.flipped ? 7 - dr : dr;
+      const to = r * 8 + c;
+      if (to === drag.from) { this.refresh(); return; }
+      const mv = this.legalCache.find(m => m.to === to);
+      if (mv) this._doMove(mv);
+      else { this._clearSelection(); this.refresh(); }
+    });
+  }
+
+  _onSquareClick(i) {
+    if (this._promoOpen) return;
+    const p = this.game.board[i];
+    if (p && this.game.colorOf(p) === this.game.turn) {
+      if (this.selected === i) { this._clearSelection(); this.refresh(); return; }
+      this._select(i);
+      this.refresh();
+      return;
+    }
+    if (this.selected >= 0) {
+      const mv = this.legalCache.find(m => m.to === i);
+      if (mv) { this._doMove(mv); return; }
+    }
+    this._clearSelection();
+    this.refresh();
+  }
+
+  _select(i) {
+    this.selected = i;
+    this.legalCache = this.game.legalMovesFrom(i);
+  }
+  _clearSelection() {
+    this.selected = -1;
+    this.legalCache = [];
+  }
+
+  async _doMove(mv) {
+    this._clearSelection();
+    if (mv.promotion) {
+      const choice = await this._askPromotion(this.game.turn);
+      this.game.make(mv, choice);
+    } else {
+      this.game.make(mv);
+    }
+    this.lastMove = mv;
+    this.refresh();
+  }
+
+  _askPromotion(color) {
+    return new Promise(resolve => {
+      this._promoOpen = true;
+      this.promoChoices.innerHTML = '';
+      ['Q', 'R', 'B', 'N'].forEach(t => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.innerHTML = PieceSVG.svg(t, color);
+        b.setAttribute('aria-label', 'Превратить в: ' + PieceNames[t]);
+        b.addEventListener('click', () => {
+          this.promoModal.hidden = true;
+          this._promoOpen = false;
+          resolve(t);
+        }, { once: true });
+        this.promoChoices.appendChild(b);
+      });
+      this.promoModal.hidden = false;
+      const first = this.promoChoices.querySelector('button');
+      if (first) first.focus();
+    });
+  }
+
+  reset() {
+    this.game.reset();
+    this._clearSelection();
+    this.lastMove = null;
+    this.refresh();
+  }
+  undo() {
+    if (this.game.undo()) {
+      this._clearSelection();
+      this.lastMove = this.game.moveList.length ? this.game.moveList[this.game.moveList.length - 1] : null;
+      this.refresh();
+    } else {
+      this.statusEl.textContent = 'Отменять нечего — ходов ещё не было';
+      setTimeout(() => this.refresh(), 1600);
+    }
+  }
+  flip() {
+    this.flipped = !this.flipped;
+    this._build();
+    this.refresh();
+  }
+
+  refresh() {
+    const b = this.game.board;
+    for (let i = 0; i < 64; i++) {
+      const el = this.squareEls[i];
+      if (!el) continue;
+      el.querySelectorAll('.piece-svg').forEach(n => n.remove());
+      el.classList.remove('selected', 'hint-move', 'hint-capture', 'last-from', 'last-to', 'in-check');
+      const p = b[i];
+      if (p) {
+        const wrap = document.createElement('span');
+        wrap.innerHTML = PieceSVG.svg(p.toUpperCase(), this.game.colorOf(p), 'piece-svg');
+        el.appendChild(wrap.firstElementChild);
+        el.setAttribute('aria-label', squareName(i) + ': ' + PieceNames[p.toUpperCase()] + (p === p.toUpperCase() ? ' (белые)' : ' (чёрные)'));
+      } else {
+        el.setAttribute('aria-label', squareName(i) + ': пусто');
+      }
+    }
+    if (this.selected >= 0) {
+      if (this.squareEls[this.selected]) this.squareEls[this.selected].classList.add('selected');
+      for (const m of this.legalCache) {
+        if (this.squareEls[m.to]) this.squareEls[m.to].classList.add(m.captured ? 'hint-capture' : 'hint-move');
+      }
+    }
+    if (this.lastMove) {
+      if (this.squareEls[this.lastMove.from]) this.squareEls[this.lastMove.from].classList.add('last-from');
+      if (this.squareEls[this.lastMove.to]) this.squareEls[this.lastMove.to].classList.add('last-to');
+    }
+    const st = this.game.status();
+    if (st.over) {
+      if (st.checkmate) this.statusEl.textContent = 'Мат! Победа ' + (st.winner === 'w' ? 'белых' : 'чёрных');
+      else this.statusEl.textContent = 'Пат — ничья';
+    } else {
+      const side = this.game.turn === 'w' ? 'белых' : 'чёрных';
+      this.statusEl.textContent = (st.check ? 'Шах! ' : '') + 'Ход ' + side;
+    }
+    if (!st.over && st.check) {
+      const kIdx = this.game.kingIndex(this.game.turn);
+      if (this.squareEls[kIdx]) this.squareEls[kIdx].classList.add('in-check');
+    }
+    this._renderMoves();
+    this._renderCaptured();
+  }
+
+  _renderMoves() {
+    const ml = this.game.moveList;
+    this.moveListEl.innerHTML = '';
+    if (ml.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'move-empty';
+      li.textContent = 'Ходов пока нет';
+      this.moveListEl.appendChild(li);
+      return;
+    }
+    ml.forEach((m, k) => {
+      const li = document.createElement('li');
+      const num = document.createElement('span');
+      num.className = 'mnum';
+      num.textContent = m.color === 'w' ? (Math.floor(k / 2) + 1) + '.' : '';
+      const txt = document.createElement('span');
+      let s = squareName(m.from) + '–' + squareName(m.to);
+      if (m.castle === 'K') s = 'O-O';
+      if (m.castle === 'Q') s = 'O-O-O';
+      if (m.promotion) s += '=' + ({ Q: 'Ф', R: 'Л', B: 'С', N: 'К' }[m.promotion]);
+      txt.textContent = s;
+      li.appendChild(num);
+      li.appendChild(txt);
+      this.moveListEl.appendChild(li);
+    });
+    this.moveListEl.scrollTop = this.moveListEl.scrollHeight;
+  }
+
+  _renderCaptured() {
+    const initial = { P: 8, N: 2, B: 2, R: 2, Q: 1 };
+    const onBoard = { w: { P: 0, N: 0, B: 0, R: 0, Q: 0 }, b: { P: 0, N: 0, B: 0, R: 0, Q: 0 } };
+    for (const p of this.game.board) {
+      if (!p) continue;
+      const t = p.toUpperCase();
+      if (t === 'K') continue;
+      onBoard[this.game.colorOf(p)][t]++;
+    }
+    const render = (color) => {
+      let html = '';
+      for (const t of ['Q', 'R', 'B', 'N', 'P']) {
+        const missing = initial[t] - onBoard[color][t];
+        for (let k = 0; k < missing; k++) html += PieceSVG.svg(t, color);
+      }
+      return html;
+    };
+    this.capturedByWhiteEl.innerHTML = render('b');
+    this.capturedByBlackEl.innerHTML = render('w');
+  }
+}
+
+function renderHeroBoard(mountEl) {
+  const setup = {
+    60: 'K', 62: 'R', 57: 'N', 51: 'P', 52: 'P',
+    4: 'k', 7: 'r', 2: 'b', 6: 'n', 12: 'p', 13: 'p', 11: 'p',
+    42: 'N', 34: 'B', 27: 'R', 24: 'Q'
+  };
+  const board = document.createElement('div');
+  board.className = 'mini-board';
+  for (let r = 0; r < 8; r++) {
+    for (let c = 0; c < 8; c++) {
+      const sq = document.createElement('div');
+      sq.className = 'msq ' + (((r + c) % 2 === 0) ? 'light' : 'dark');
+      const i = r * 8 + c;
+      if (setup[i]) {
+        const color = setup[i] === setup[i].toUpperCase() ? 'w' : 'b';
+        sq.innerHTML = PieceSVG.svg(setup[i].toUpperCase(), color);
+      }
+      board.appendChild(sq);
+    }
+  }
+  mountEl.innerHTML = '';
+  mountEl.appendChild(board);
+}
+
+/* ============================================================
+   ИНИЦИАЛИЗАЦИЯ
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  const cfg = window.SITE_CONFIG || {};
+
+  document.querySelectorAll('[data-cfg]').forEach(el => {
+    const key = el.dataset.cfg;
+    if (cfg[key] !== undefined && cfg[key] !== '') {
+      el.textContent = cfg[key];
+    }
+  });
+
+  const yr = document.getElementById('year');
+  if (yr) yr.textContent = new Date().getFullYear();
+
+  const tgLinks = [document.getElementById('telegramLink'), document.getElementById('telegramLinkFooter')];
+  const waLinks = [document.getElementById('whatsappLink'), document.getElementById('whatsappLinkFooter')];
+  tgLinks.forEach(a => { if (a && cfg.telegram) a.href = cfg.telegram; });
+  waLinks.forEach(a => { if (a && cfg.whatsapp) a.href = cfg.whatsapp; });
+
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const open = mainNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  const header = document.getElementById('siteHeader');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(r => observer.observe(r));
+  } else {
+    reveals.forEach(r => r.classList.add('visible'));
+  }
+
+  const heroBoardEl = document.getElementById('heroBoard');
+  if (heroBoardEl) renderHeroBoard(heroBoardEl);
+
+  const boardEl = document.getElementById('chessboard');
+  if (boardEl) {
+    const game = new ChessGame();
+    const ui = new ChessBoardUI(game, {
+      board: boardEl,
+      status: document.getElementById('boardStatus'),
+      moveList: document.getElementById('moveList'),
+      capturedByWhite: document.getElementById('capturedByWhite'),
+      capturedByBlack: document.getElementById('capturedByBlack'),
+      promotionModal: document.getElementById('promotionModal'),
+      promotionChoices: document.getElementById('promotionChoices')
+    });
+
+    document.getElementById('btnUndo')?.addEventListener('click', () => ui.undo());
+    document.getElementById('btnReset')?.addEventListener('click', () => ui.reset());
+    document.getElementById('btnFlip')?.addEventListener('click', () => ui.flip());
+  }
+
+  document.querySelectorAll('[data-level], [data-plan]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const level = btn.dataset.level;
+      const plan = btn.dataset.plan;
+      const selLevel = document.getElementById('fLevel');
+      if (selLevel && level) selLevel.value = level;
+      const comment = document.getElementById('fComment');
+      if (comment && plan) comment.value = `Интересует тариф: ${plan}`;
+    });
+  });
+
+  const bookingForm = document.getElementById('bookingForm');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const statusEl = document.getElementById('formStatus');
+      const name = document.getElementById('fName').value.trim();
+      const age = document.getElementById('fAge').value.trim();
+      const contact = document.getElementById('fContact').value.trim();
+      const errName = document.getElementById('errName');
+      const errAge = document.getElementById('errAge');
+      const errContact = document.getElementById('errContact');
+
+      let valid = true;
+      if (errName) errName.textContent = '';
+      if (errAge) errAge.textContent = '';
+      if (errContact) errContact.textContent = '';
+
+      if (!name) { if (errName) errName.textContent = 'Укажите ваше имя'; valid = false; }
+      if (!age) { if (errAge) errAge.textContent = 'Укажите возраст'; valid = false; }
+      if (!contact) { if (errContact) errContact.textContent = 'Укажите контакт для связи'; valid = false; }
+
+      if (!valid) return;
+
+      const formData = {
+        name,
+        age,
+        level: document.getElementById('fLevel')?.value,
+        format: document.getElementById('fFormat')?.value,
+        time: document.getElementById('fTime')?.value.trim(),
+        contact,
+        comment: document.getElementById('fComment')?.value.trim()
+      };
+
+      const btnSubmit = document.getElementById('btnSubmit');
+      if (btnSubmit) btnSubmit.classList.add('loading');
+
+      if (cfg.bookingEndpoint) {
+        try {
+          const res = await fetch(cfg.bookingEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+          });
+          if (res.ok) {
+            statusEl.className = 'form-status show ok';
+            statusEl.textContent = 'Заявка успешно отправлена! Я свяжусь с вами в ближайшее время.';
+            bookingForm.reset();
+          } else {
+            throw new Error('Ошибка сервера');
+          }
+        } catch (err) {
+          statusEl.className = 'form-status show error';
+          statusEl.textContent = 'Не удалось отправить форму. Напишите напрямую в Telegram или WhatsApp.';
+        } finally {
+          if (btnSubmit) btnSubmit.classList.remove('loading');
+        }
+      } else {
+        setTimeout(() => {
+          if (btnSubmit) btnSubmit.classList.remove('loading');
+          statusEl.className = 'form-status show info';
+          const msg = encodeURIComponent(`Здравствуйте! Хочу записаться на занятие по шахматам.\nИмя: ${formData.name}\nВозраст: ${formData.age}\nУровень: ${formData.level}\nФормат: ${formData.format}\nКонтакт: ${formData.contact}`);
+          const tgUrl = cfg.telegram ? `${cfg.telegram}?text=${msg}` : '#';
+          statusEl.innerHTML = `Заявка сформирована! Нажмите сюда, чтобы отправить её в <a href="${tgUrl}" target="_blank" rel="noopener">Telegram</a>.`;
+        }, 400);
+      }
+    });
+  }
+});
+  </script>
+</body>
+</html>
